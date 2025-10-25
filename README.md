@@ -1,3 +1,7 @@
 # FugaEspacial
 
-Jogo desenvolvido em C, a ideia do jogo é que um nave busque fugir dos meteoros que caem cade vez mais rapido 
+## Objetivo:
+
+O jogador controla uma nave que precisa desviar de meteoros caindo do topo da tela.
+Cada meteoro que o jogador evita soma pontos.
+Se a nave colide com um meteoro, o jogo acaba.
