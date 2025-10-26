@@ -18,15 +18,25 @@ Biblioteca CLI-LIB para manipular tela, teclado e tempo
 ## Estrutura do Projeto
 
 fuga espacial/
+
 ├── build/               # pasta de saída do executável
+
 ├── src/                 # código-fonte principal
+
 │   ├── main.c           # função principal (loop do jogo)
+
 │   ├── jogo.c           # funções de lógica e renderização
+
 │   ├── jogo.h           # cabeçalhos e protótipos das funções
+
 │   └── estruturas.h     # definição das structs
+
 ├── cli-lib/             # biblioteca auxiliar para CLI
+
 │   ├── include/         # headers (screen.h, keyboard.h, timer.h)
+
 │   └── src/             # implementações (.c)
+
 └── Makefile             # script de compilação
 
 ## Como Compilar
@@ -49,9 +59,13 @@ make clean
 ## Controles
 
 | Tecla | Ação                |
+
 | :---- | :------------------ |
+
 | `A`   | Mover para esquerda |
+
 | `D`   | Mover para direita  |
+
 | `ESC` | Encerrar o jogo     |
 
 ## Funcionalidades Atuais
