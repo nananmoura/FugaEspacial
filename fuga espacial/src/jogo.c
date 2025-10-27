@@ -8,11 +8,23 @@ void inicializar_jogo(Nave *n, Placar *p) {
 }
 
 void mover_nave(Nave *n, char tecla) {
-    if (tecla == 'a' && n->x > 1)
+    // Esquerda
+    if ((tecla == 'a' || tecla == 'A') && n->x > 1)
         n->x--;
-    if (tecla == 'd' && n->x < MAXX - 2)
+
+    // Direita
+    else if ((tecla == 'd' || tecla == 'D') && n->x < MAXX - 2)
         n->x++;
+
+    // Cima
+    else if ((tecla == 'w' || tecla == 'W') && n->y > 1)
+        n->y--;
+
+    // Baixo
+    else if ((tecla == 's' || tecla == 'S') && n->y < MAXY - 2)
+        n->y++;
 }
+
 
 void desenhar_jogo(Nave *n, Meteoro *m, Placar p) {
     screenClear();

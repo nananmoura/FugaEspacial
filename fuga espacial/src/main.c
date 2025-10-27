@@ -19,8 +19,10 @@ int main() {
             char tecla = readch();
             if (tecla == 27) // ESC pra sair
             rodando = 0;
-            if (tecla == 'a' || tecla == 'd')
+            if (tecla == 'a' || tecla == 'd' || tecla == 'w' || tecla == 's' ||
+            tecla == 'A' || tecla == 'D' || tecla == 'W' || tecla == 'S')
             mover_nave(&nave, tecla);
+
         }
 
         if (timerTimeOver()) {
