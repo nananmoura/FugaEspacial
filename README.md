@@ -1,84 +1,85 @@
-# Fuga Espacial
+# 🚀 Fuga Espacial
 
-Um jogo simples em C, rodando no terminal, desenvolvido como projeto acadêmico para praticar estruturas, funções, alocação dinâmica e uso de bibliotecas externas.
-O jogador controla uma nave tentando sobreviver no espaço, desviando de meteoros (fases futuras).
+**Fuga Espacial** é um jogo em C, executado no terminal, desenvolvido como projeto acadêmico para praticar lógica de programação, estruturas, modularização, alocação dinâmica e uso de bibliotecas externas.  
+O jogador controla uma nave que deve desviar de meteoros enquanto a dificuldade aumenta progressivamente.
 
-## Objetivo do Projeto
+---
 
-Implementar um jogo interativo em C utilizando:
+## 🎯 Objetivo do Projeto
 
-Estruturas (struct)
+Este projeto foi desenvolvido com o intuito de praticar:
 
-Funções e modularização (.c e .h)
+- ✅ Estruturas (`struct`)
+- ✅ Modularização com múltiplos arquivos (`.c` e `.h`)
+- ✅ Alocação dinâmica de memória
+- ✅ Listas encadeadas (para os meteoros)
+- ✅ Uso da biblioteca **CLI-LIB** para:
+  - controle de teclado
+  - renderização no terminal
+  - gerenciamento de tempo (timer)
 
-Alocação dinâmica
+---
 
-Biblioteca CLI-LIB para manipular tela, teclado e tempo
-
-## Estrutura do Projeto
+## 📁 Estrutura do Projeto
 
 fuga espacial/
+├── build/ # pasta de saída do executável
 
-├── build/               # pasta de saída do executável
+├── src/ # código-fonte principal
 
-├── src/                 # código-fonte principal
+│ ├── main.c # loop principal do jogo
 
-│   ├── main.c           # função principal (loop do jogo)
+│ ├── jogo.c # lógica, desenho e mecânicas do jogo
 
-│   ├── jogo.c           # funções de lógica e renderização
+│ ├── jogo.h # protótipos das funções e includes
 
-│   ├── jogo.h           # cabeçalhos e protótipos das funções
+│ └── estruturas.h # definição das structs
 
-│   └── estruturas.h     # definição das structs
+├── cli-lib/ # biblioteca auxiliar para CLI
 
-├── cli-lib/             # biblioteca auxiliar para CLI
+│ ├── include/ # screen.h, keyboard.h, timer.h
 
-│   ├── include/         # headers (screen.h, keyboard.h, timer.h)
+│ └── src/ # implementações da biblioteca
 
-│   └── src/             # implementações (.c)
+└── Makefile # script de compilação
 
-└── Makefile             # script de compilação
 
-## Como Compilar
+---
+
+## 🧠 Mecânica do Jogo
+
+### Controles
+
+| Tecla | Ação                    |
+|-------|--------------------------|
+| `A`   | Mover para esquerda      |
+| `D`   | Mover para direita       |
+| `W`   | Mover para cima          |
+| `S`   | Mover para baixo         |
+| `ESC` | Encerrar o jogo          |
+
+---
+
+## ✅ Funcionalidades Implementadas
+
+| Status | Funcionalidade |
+|--------|----------------|
+| ✅ | Nave controlável no terminal |
+| ✅ | Meteoros caindo e se movendo pela tela |
+| ✅ | Pontuação aumentando ao desviar dos meteoros |
+| ✅ | Sistema de níveis baseado na pontuação |
+| ✅ | Velocidade dos meteoros aumenta a cada nível |
+| ✅ | Meteoros surgem de diferentes posições conforme o nível |
+| ✅ | Colisão entre nave e meteoro encerra o jogo |
+| ✅ | Animação de “LEVEL UP” com som |
+
+---
+
+## 🧪 Como Compilar e Executar
 
 No terminal (Linux):
 
+```bash
 cd "fuga espacial"
 make run
-
-O jogo será compilado dentro da pasta build/ e executado automaticamente.
-
-Se quiser apenas compilar sem rodar:
-
-make
-
-Para limpar os arquivos compilados:
-
-make clean
-
-## Controles
-
-| Tecla | Ação                |
-
-| :---- | :------------------ |
-
-| `A`   | Mover para esquerda |
-
-| `D`   | Mover para direita  |
-
-| `ESC` | Encerrar o jogo     |
-
-## Funcionalidades Atuais
-
-✅ Nave controlável no terminal
-✅ Pontuação e recorde exibidos
-✅ Estruturas de dados criadas (Nave, Meteoro, Placar)
-✅ Organização modular (.c e .h)
-✅ Uso da biblioteca cli-lib para interação
-
-## Próximos Passos
-
-🚧 Implementar geração e queda dos meteoros
-🚧 Adicionar colisão entre nave e meteoro
-🚧 Criar sistema de pontuação e recorde persistente
-🚧 Melhorar a interface visual (ASCII ou Raylib no futuro)
+```

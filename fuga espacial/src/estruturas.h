@@ -1,16 +1,21 @@
-#ifndef ESTRUTURA_H
-#define ESTRUTURA_H
+#ifndef ESTRUTURAS_H
+#define ESTRUTURAS_H
 
 #define MAXX 80
-#define MAXY 25
+#define MAXY 24
 
 typedef struct {
-    int x, y;
+    int x, y;        
+    int rotacao;     
+    int vidas;      
 } Nave;
 
-typedef struct meteoro {
+typedef struct Meteoro {
     int x, y;
-    struct meteoro *prox;
+    int direcao;
+    int tamanho;
+    int vida;
+    struct Meteoro *prox;
 } Meteoro;
 
 typedef struct {
@@ -19,3 +24,5 @@ typedef struct {
 } Placar;
 
 #endif
+
+
