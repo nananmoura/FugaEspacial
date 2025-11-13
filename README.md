@@ -24,6 +24,7 @@ Este projeto foi desenvolvido com o intuito de praticar:
 
 fuga espacial/
 ├── build/ # pasta de saída do executável
+
 ├── src/ # código-fonte principal
 
 │ ├── main.c # loop principal do jogo
