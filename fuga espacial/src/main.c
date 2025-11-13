@@ -1,4 +1,5 @@
 #include "jogo.h"
+#include <stdlib.h>
 
 int main() {
     screenInit(1);
@@ -12,34 +13,35 @@ int main() {
     inicializar_jogo(&nave, &placar);
 
     int rodando = 1;
-    int contador = 0;
 
     while (rodando) {
         if (keyhit()) {
             char tecla = readch();
-            if (tecla == 27) // ESC pra sair
-            rodando = 0;
-            if (tecla == 'a' || tecla == 'd' || tecla == 'w' || tecla == 's' ||
-            tecla == 'A' || tecla == 'D' || tecla == 'W' || tecla == 'S')
-            mover_nave(&nave, tecla);
 
+            if (tecla == 27)
+                rodando = 0;
+            else
+                mover_nave(&nave, tecla);
         }
 
         if (timerTimeOver()) {
-            contador++;
-            if (contador % 5 == 0) gerar_meteoro(&meteoritos);
-            atualizar_meteoros(&meteoritos, &placar);
-            if (verificar_colisao(nave, meteoritos)) rodando = 0;
+
+            int nivel = placar.pontos / 10 + 1;
+
+            if (rand() % 100 < nivel * 10) {
+                gerar_meteoro(&meteoritos, &placar, nivel);
+            }
+
+            atualizar_jogo(&nave, &meteoritos, &placar);
             desenhar_jogo(&nave, meteoritos, placar);
         }
     }
 
     salvar_recorde(placar);
     liberar_meteoros(meteoritos);
-
     keyboardDestroy();
     screenDestroy();
     timerDestroy();
-
     return 0;
 }
+

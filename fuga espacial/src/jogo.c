@@ -1,47 +1,76 @@
 #include "jogo.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <time.h>
 
 void inicializar_jogo(Nave *n, Placar *p) {
-    n->x = MAXX / 2;
-    n->y = MAXY - 2;
+    srand(time(NULL));
+    inicializar_nave(n);
+    n->vidas = 3;
+
     p->pontos = 0;
     p->recorde = 0;
+    carregar_recorde(p);
 }
-
-void mover_nave(Nave *n, char tecla) {
-    // Esquerda
-    if ((tecla == 'a' || tecla == 'A') && n->x > 1)
-        n->x--;
-
-    // Direita
-    else if ((tecla == 'd' || tecla == 'D') && n->x < MAXX - 2)
-        n->x++;
-
-    // Cima
-    else if ((tecla == 'w' || tecla == 'W') && n->y > 1)
-        n->y--;
-
-    // Baixo
-    else if ((tecla == 's' || tecla == 'S') && n->y < MAXY - 2)
-        n->y++;
-}
-
 
 void desenhar_jogo(Nave *n, Meteoro *m, Placar p) {
     screenClear();
+    screenDrawBorders();
 
-    screenGotoxy(n->x, n->y);
-    printf("^"); // desenha a nave
+    screenGotoxy(2, 1);
+    printf("VIDAS: ");
+    for (int i = 0; i < n->vidas; i++) {
+        printf("<3 ");
+    }
 
-    screenGotoxy(0, 0);
-    printf("Pontuação: %d  Recorde: %d", p.pontos, p.recorde);
+    screenGotoxy(20, 1);
+    printf("PONTOS: %d", p.pontos);
+
+    screenGotoxy(50, 1);
+    printf("RECORDE: %d", p.recorde);
+
+    desenhar_nave(*n);
+    desenhar_meteoros(m);
 
     screenUpdate();
 }
 
-// Funções vazias por enquanto (vamos preencher depois)
-void atualizar_meteoros(Meteoro **lista, Placar *p) {}
-void gerar_meteoro(Meteoro **lista) {}
-int verificar_colisao(Nave n, Meteoro *lista) { return 0; }
-void liberar_meteoros(Meteoro *lista) {}
-void carregar_recorde(Placar *p) {}
-void salvar_recorde(Placar p) {}
+void atualizar_jogo(Nave *n, Meteoro **lista, Placar *p) {
+    atualizar_meteoros(lista, p, *n);
+
+    if (verificar_colisao(*n, *lista)) {
+        n->vidas--;
+
+        if (n->vidas <= 0) {
+            screenGotoxy(MAXX / 2 - 6, MAXY / 2);
+            printf("GAME OVER!");
+            screenUpdate();
+            usleep(1200000);
+            salvar_recorde(*p);
+            keyboardDestroy();
+            screenDestroy();
+            timerDestroy();
+            exit(0);
+        }
+    }
+}
+
+void salvar_recorde(Placar placar) {
+    if (placar.pontos > placar.recorde) {
+        FILE *arquivo = fopen("recorde.txt", "w");
+        if (arquivo != NULL) {
+            fprintf(arquivo, "%d", placar.pontos);
+            fclose(arquivo);
+        }
+    }
+}
+
+void carregar_recorde(Placar *p) {
+    FILE *f = fopen("recorde.txt", "r");
+    if (f) {
+        fscanf(f, "%d", &p->recorde);
+        fclose(f);
+    } else {
+        p->recorde = 0;
+    }
+}
