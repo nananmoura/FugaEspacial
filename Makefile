@@ -1,9 +1,9 @@
 CC = gcc
-CFLAGS = -Wall -I../cli-lib/include -I./src
+CFLAGS = -Wall -I./cli-lib/include -I./fuga_espacial/src
 
-SRC_DIR = src
-BUILD_DIR = build
-CLI_LIB = ../cli-lib/src
+SRC_DIR = fuga_espacial/src
+BUILD_DIR = fuga_espacial/build
+CLI_LIB = cli-lib/src
 
 SRC = $(SRC_DIR)/main.c \
       $(SRC_DIR)/jogo.c \
